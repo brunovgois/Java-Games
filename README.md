@@ -1,1 +1,1 @@
-# Directory to publish some simple Java games, mostly using Swing framework 
+# Repository to publish some simple Java games, mostly using Swing framework 
