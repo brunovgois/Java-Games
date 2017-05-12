@@ -7,9 +7,10 @@ import javax.swing.JPanel;
 
 public class Board extends JPanel {
 
+    Snake snake = new Snake();
+
     Board() {
         setBackground(Color.BLACK);
-        new Controller();
     }
 
     @Override
@@ -17,6 +18,6 @@ public class Board extends JPanel {
         super.paintComponent(g);
         g.setColor(Color.green);
 
-        g.fillRect(100, 50, 20, 20);
+        g.fillRect(snake.getX(), snake.getY(), 20, 20);
     }
 }

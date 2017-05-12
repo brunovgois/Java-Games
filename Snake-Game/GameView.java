@@ -12,6 +12,7 @@ public class GameView extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        new Controller();
         Board board = new Board();
         add(board);
     }

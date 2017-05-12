@@ -5,11 +5,11 @@ public class GameRules {
     private int SnakeSpeed = 5;
 
     public void runGame() {
-        System.out.println("Rodando...");
+
     }
 
-    public void snakeMove(Snake snake) {
-
+    private void snakeMove(Snake snake) {
+        
     }
 
 }

@@ -4,66 +4,77 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Controller extends JPanel implements KeyListener {
+public class Controller extends Board implements KeyListener {
 
     // ~60 fps
     int delay = 15;
-    boolean upTyped = false;
-    boolean downTyped = false;
-    boolean leftTyped = false;
-    boolean rightTyped = false;
+    boolean upPressed = false;
+    boolean downPressed = false;
+    boolean leftPressed = false;
+    boolean rightPressed = false;
+    int snakeSpeedX = 2, snakeSpeedY = 2;
 
-    GameRules game = new GameRules();
+    Snake snake = new Snake();
 
     public Controller() {
         addKeyListener(this);
         setFocusable(true);
         Timer timer = new Timer(delay, (ActionEvent e) -> {
-            game.runGame();
+            gameRun();
         });
         timer.start();
+
     }
 
-    private void SnakeMove(boolean keyPress) {
-        upTyped = false;
-        downTyped = false;
-        leftTyped = false;
-        rightTyped = false;
-        keyPress = true;
-        System.out.println("Tecla pressioanda..");
-    }
+    void gameRun() {
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            SnakeMove(upTyped);
-            // upPressed = true;
+        snake.setX(snake.getX() + snakeSpeedX);
+        snake.setY(snake.getY() + snakeSpeedY);
 
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            SnakeMove(downTyped);
-            // downPressed = true;
-
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            SnakeMove(leftTyped);
-            // leftPressed = true;
-
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            SnakeMove(rightTyped);
-            // rightPressed = true;
-        }
-
+        System.out.println("X/Y = " + snake.getX() + "/" + snake.getY()); // debug
+        super.repaint(); // problema de heranca, paint() deve ser feito no JPanel ou JFrame?
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            upPressed = true;
+
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            downPressed = true;
+
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            leftPressed = true;
+
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            rightPressed = true;
+
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            upPressed = false;
+
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            downPressed = false;
+
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            leftPressed = false;
+
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            rightPressed = false;
+
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
     }
 
 }
